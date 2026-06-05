@@ -1,4 +1,3 @@
-/* Configurações Globais */
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +6,7 @@
 }
 
 body {
-    background-color: #0b132b; /* Azul-escuro */
+    background-color: #0b132b;
     color: #f4f6f9;
     min-height: 100vh;
     padding: 60px 20px;
@@ -60,7 +59,6 @@ h1 {
     height: 24px;
 }
 
-/* Estilos da Página de Eventos (Logs) */
 .logs-list {
     display: flex;
     flex-direction: column;
@@ -111,7 +109,6 @@ h1 {
     color: #ff4d4d;
 }
 
-/* Gaveta de detalhes expansível */
 .log-details {
     max-height: 0;
     overflow: hidden;
@@ -121,7 +118,7 @@ h1 {
 }
 
 .log-details.active {
-    max-height: 300px; /* Limite de altura seguro para transição */
+    max-height: 300px;
     padding: 20px;
     border-top: 1px solid #3a506b;
 }
@@ -141,7 +138,7 @@ h1 {
     color: #48cae4;
 }
 
-/* Estilos da Página de Relatórios */
+
 .report-card {
     background-color: #1c2541;
     border: 1px solid #3a506b;
@@ -181,7 +178,7 @@ h1 {
     font-family: monospace;
 }
 
-/* Indicadores Coloridos do Relatório */
+
 .dot {
     width: 10px;
     height: 10px;
@@ -193,11 +190,11 @@ h1 {
 .dot.blue { background-color: #48cae4; }
 .dot.green { background-color: #2a9d8f; }
 
-/* Responsividade */
+
 @media (max-width: 600px) {
     body { padding-top: 80px; }
     .log-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-}/* Configurações Globais */
+}
 * {
     margin: 0;
     padding: 0;
@@ -206,7 +203,7 @@ h1 {
 }
 
 body {
-    background-color: #0b132b; /* Azul-escuro */
+    background-color: #0b132b; 
     color: #f4f6f9;
     min-height: 100vh;
     padding: 60px 20px;
@@ -229,7 +226,6 @@ h1 {
     font-size: 1.1rem;
 }
 
-/* Ícone de Home Canto Superior Esquerdo */
 .home-icon {
     position: fixed;
     top: 20px;
@@ -258,8 +254,6 @@ h1 {
     width: 24px;
     height: 24px;
 }
-
-/* Estilos da Página de Eventos (Logs) */
 .logs-list {
     display: flex;
     flex-direction: column;
@@ -309,8 +303,6 @@ h1 {
 .log-item.alert .user-ip {
     color: #ff4d4d;
 }
-
-/* Gaveta de detalhes expansível */
 .log-details {
     max-height: 0;
     overflow: hidden;
@@ -320,7 +312,7 @@ h1 {
 }
 
 .log-details.active {
-    max-height: 300px; /* Limite de altura seguro para transição */
+    max-height: 300px;
     padding: 20px;
     border-top: 1px solid #3a506b;
 }
@@ -340,7 +332,6 @@ h1 {
     color: #48cae4;
 }
 
-/* Estilos da Página de Relatórios */
 .report-card {
     background-color: #1c2541;
     border: 1px solid #3a506b;
@@ -379,8 +370,6 @@ h1 {
     color: #ff4d4d;
     font-family: monospace;
 }
-
-/* Indicadores Coloridos do Relatório */
 .dot {
     width: 10px;
     height: 10px;

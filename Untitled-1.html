@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Eventos e Logs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a href="index.html" class="home-icon" title="Voltar para Home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+    </a>
+
+    <div class="container">
+        <h1>Logs de Eventos de Usuários</h1>
+        <p class="subtitle">Clique no nome de um usuário para visualizar os detalhes completos da sessão.</p>
+
+        <div class="logs-list">
+            <div class="log-item">
+                <div class="log-header" onclick="toggleDetails('user1')">
+                    <span class="user-name">Carlos Silva</span>
+                    <span class="user-ip">IP: 192.168.1.45</span>
+                </div>
+                <div id="user1" class="log-details">
+                    <div class="details-grid">
+                        <p><strong>Nome Completo:</strong> Carlos Silva</p>
+                        <p><strong>Endereço IP:</strong> 192.168.1.45</p>
+                        <p><strong>Data de Acesso:</strong> 03/06/2026</p>
+                        <p><strong>Horário de Login:</strong> 08:34:12</p>
+                        <p><strong>Horário de Logoff:</strong> 17:15:00</p>
+                        <p><strong>Tempo Total:</strong> 8h 40min 48s</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="log-item">
+                <div class="log-header" onclick="toggleDetails('user2')">
+                    <span class="user-name">Amanda Oliveira</span>
+                    <span class="user-ip">IP: 187.54.210.12</span>
+                </div>
+                <div id="user2" class="log-details">
+                    <div class="details-grid">
+                        <p><strong>Nome Completo:</strong> Amanda Oliveira</p>
+                        <p><strong>Endereço IP:</strong> 187.54.210.12</p>
+                        <p><strong>Data de Acesso:</strong> 03/06/2026</p>
+                        <p><strong>Horário de Login:</strong> 14:22:05</p>
+                        <p><strong>Horário de Logoff:</strong> 15:40:30</p>
+                        <p><strong>Tempo Total:</strong> 1h 18min 25s</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="log-item alert">
+                <div class="log-header" onclick="toggleDetails('user3')">
+                    <span class="user-name">Anônimo (Suspeito)</span>
+                    <span class="user-ip">IP: 45.230.12.99</span>
+                </div>
+                <div id="user3" class="log-details">
+                    <div class="details-grid">
+                        <p><strong>Nome Completo:</strong> Desconhecido / Força Bruta</p>
+                        <p><strong>Endereço IP:</strong> 45.230.12.99</p>
+                        <p><strong>Data de Acesso:</strong> 02/06/2026</p>
+                        <p><strong>Horário de Login:</strong> 23:55:00</p>
+                        <p><strong>Horário de Logoff:</strong> 23:58:12</p>
+                        <p><strong>Tempo Total:</strong> 0h 03min 12s</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails(id) {
+            const element = document.getElementById(id);
+            // Fecha outros que possam estar abertos (opcional, para organização)
+            const allDetails = document.querySelectorAll('.log-details');
+            allDetails.forEach(detail => {
+                if(detail.id !== id) detail.classList.remove('active');
+            });
+            
+            // Abre ou fecha o selecionado
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

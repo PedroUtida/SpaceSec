@@ -1,0 +1,399 @@
+/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b132b; /* Azul-escuro */
+    color: #f4f6f9;
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: #48cae4;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #a0aab2;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Ícone de Home Canto Superior Esquerdo */
+.home-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #1c2541;
+    color: #48cae4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid #3a506b;
+}
+
+.home-icon:hover {
+    background-color: #48cae4;
+    color: #0b132b;
+    transform: translateY(-2px);
+}
+
+.home-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Estilos da Página de Eventos (Logs) */
+.logs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.log-item {
+    background-color: #1c2541;
+    border: 1px solid #3a506b;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.log-item.alert {
+    border-color: #ff4d4d;
+}
+
+.log-header {
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.log-header:hover {
+    background-color: #232f54;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.user-ip {
+    color: #48cae4;
+    font-family: monospace;
+    background-color: #0b132b;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.log-item.alert .user-ip {
+    color: #ff4d4d;
+}
+
+/* Gaveta de detalhes expansível */
+.log-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    background-color: #151c33;
+    border-top: 0 solid #3a506b;
+}
+
+.log-details.active {
+    max-height: 300px; /* Limite de altura seguro para transição */
+    padding: 20px;
+    border-top: 1px solid #3a506b;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.details-grid p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+.details-grid strong {
+    color: #48cae4;
+}
+
+/* Estilos da Página de Relatórios */
+.report-card {
+    background-color: #1c2541;
+    border: 1px solid #3a506b;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.report-section {
+    margin-bottom: 25px;
+}
+
+.report-section:last-child {
+    margin-bottom: 0;
+}
+
+.report-section h2 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.report-section p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.report-section code {
+    background-color: #0b132b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #ff4d4d;
+    font-family: monospace;
+}
+
+/* Indicadores Coloridos do Relatório */
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot.red { background-color: #ff4d4d; }
+.dot.yellow { background-color: #ffb703; }
+.dot.blue { background-color: #48cae4; }
+.dot.green { background-color: #2a9d8f; }
+
+/* Responsividade */
+@media (max-width: 600px) {
+    body { padding-top: 80px; }
+    .log-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b132b; /* Azul-escuro */
+    color: #f4f6f9;
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: #48cae4;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #a0aab2;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Ícone de Home Canto Superior Esquerdo */
+.home-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #1c2541;
+    color: #48cae4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid #3a506b;
+}
+
+.home-icon:hover {
+    background-color: #48cae4;
+    color: #0b132b;
+    transform: translateY(-2px);
+}
+
+.home-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Estilos da Página de Eventos (Logs) */
+.logs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.log-item {
+    background-color: #1c2541;
+    border: 1px solid #3a506b;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.log-item.alert {
+    border-color: #ff4d4d;
+}
+
+.log-header {
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.log-header:hover {
+    background-color: #232f54;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.user-ip {
+    color: #48cae4;
+    font-family: monospace;
+    background-color: #0b132b;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.log-item.alert .user-ip {
+    color: #ff4d4d;
+}
+
+/* Gaveta de detalhes expansível */
+.log-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    background-color: #151c33;
+    border-top: 0 solid #3a506b;
+}
+
+.log-details.active {
+    max-height: 300px; /* Limite de altura seguro para transição */
+    padding: 20px;
+    border-top: 1px solid #3a506b;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.details-grid p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+.details-grid strong {
+    color: #48cae4;
+}
+
+/* Estilos da Página de Relatórios */
+.report-card {
+    background-color: #1c2541;
+    border: 1px solid #3a506b;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.report-section {
+    margin-bottom: 25px;
+}
+
+.report-section:last-child {
+    margin-bottom: 0;
+}
+
+.report-section h2 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.report-section p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.report-section code {
+    background-color: #0b132b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #ff4d4d;
+    font-family: monospace;
+}
+
+/* Indicadores Coloridos do Relatório */
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot.red { background-color: #ff4d4d; }
+.dot.yellow { background-color: #ffb703; }
+.dot.blue { background-color: #48cae4; }
+.dot.green { background-color: #2a9d8f; }
+
+/* Responsividade */
+@media (max-width: 600px) {
+    body { padding-top: 80px; }
+    .log-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

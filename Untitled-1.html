@@ -75,13 +75,11 @@
     <script>
         function toggleDetails(id) {
             const element = document.getElementById(id);
-            // Fecha outros que possam estar abertos (opcional, para organização)
             const allDetails = document.querySelectorAll('.log-details');
             allDetails.forEach(detail => {
                 if(detail.id !== id) detail.classList.remove('active');
             });
             
-            // Abre ou fecha o selecionado
             element.classList.toggle('active');
         }
     </script>

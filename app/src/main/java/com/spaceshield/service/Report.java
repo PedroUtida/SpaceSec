@@ -1,4 +1,7 @@
-package com.spaceshield;
+package com.spaceshield.service;
+
+import com.spaceshield.model.AccessEvent;
+import com.spaceshield.model.Satellite;
 
 public class Report {
     public static void generateIncidentHistory(Satellite satellite) {

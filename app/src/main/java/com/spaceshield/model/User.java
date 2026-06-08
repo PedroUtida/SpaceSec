@@ -1,4 +1,4 @@
-package com.spaceshield;
+package com.spaceshield.model;
 
 public class User {
     private int id;

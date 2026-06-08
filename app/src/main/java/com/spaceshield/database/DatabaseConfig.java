@@ -1,4 +1,4 @@
-package com.spaceshield;
+package com.spaceshield.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

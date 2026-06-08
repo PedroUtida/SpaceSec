@@ -52,7 +52,7 @@ public class SpaceShieldApp {
         while (usuarioAtual == null && rodando) {
             System.out.println("\n[1] Fazer Login");
             System.out.println("[2] Sair do Sistema");
-            System.out.println("[3] Criar Conta (Sign Up)");
+            System.out.println("[3] Criar Conta");
             System.out.print("Escolha uma opção: ");
             String opcaoAuth = scanner.nextLine();
 

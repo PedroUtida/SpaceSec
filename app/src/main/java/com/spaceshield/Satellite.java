@@ -39,4 +39,5 @@ public class Satellite {
     public String getStatus() { return status; }
     public String getRiskLevel() { return riskLevel; }
     public List<AccessEvent> getEvents() { return events; }
+    public void setId(int id) { this.id = id; }
 }

@@ -22,4 +22,5 @@ public class AccessEvent {
     public String getEventType() { return eventType; }
     public String getDescription() { return description; }
     public LocalDateTime getTimestamp() { return timestamp; }
+    public void setId(int id) { this.id = id; }
 }

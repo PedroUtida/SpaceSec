@@ -24,7 +24,7 @@ public class SpaceShieldApp {
 
             System.out.println("ACCESS GRANTED. Welcome, " + adminUser.getName() + ".\n");
 
-            Monitoring system = new Monitoring();
+            Monitoring system = new Monitoring(dbConnection);
             
             Satellite s1 = new Satellite(1, "Starlink-BR1", "Internet");
             Satellite s2 = new Satellite(2, "GeoSync-Defense", "Military Communications");

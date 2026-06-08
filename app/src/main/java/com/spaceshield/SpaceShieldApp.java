@@ -5,19 +5,23 @@ import com.spaceshield.service.*;
 import java.util.Scanner;
 
 public class SpaceShieldApp {
+
+    public static void limparTela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         AuthService authService = new AuthService();
         Monitoring system = new Monitoring();
 
-        User admin = authService.registerUser("Admin FIAP", "admin@spaceshield.com", "1234");
-
-        system.registerSatellite(new Satellite(1, admin.getId(), "Starlink-BR1", "Internet"));
-        system.registerSatellite(new Satellite(2, admin.getId(), "GeoSync-Defense", "Militar"));
+        authService.registerUser("Admin FIAP", "admin@spaceshield.com", "1234");
 
         boolean rodando = true;
         User usuarioAtual = null;
+        int contadorComandos = 0;
 
         System.out.println("==================================================");
         System.out.println("      BEM-VINDO AO TERMINAL SPACESHIELD           ");
@@ -36,10 +40,11 @@ public class SpaceShieldApp {
                 System.out.print("Senha (dica: 1234): ");
                 String senha = scanner.nextLine();
 
-                usuarioAtual = authService.login(email, senha); // Puxa o objeto!
+                usuarioAtual = authService.login(email, senha);
 
                 if (usuarioAtual != null) {
-                    System.out.println("\n>>> ACESSO CONCEDIDO. Bem-vindo, " + usuarioAtual.getName() + ".");
+                    limparTela();
+                    System.out.println(">>> ACESSO CONCEDIDO. Bem-vindo, " + usuarioAtual.getName() + ".");
                 } else {
                     System.out.println("\n[!] ACESSO NEGADO. Credenciais incorretas.");
                 }
@@ -56,7 +61,7 @@ public class SpaceShieldApp {
                 String novaSenha = scanner.nextLine();
 
                 User userCriado = authService.registerUser(novoNome, novoEmail, novaSenha);
-                
+
                 if (userCriado != null) {
                     System.out.println("[+] Conta criada com sucesso! Você já pode fazer login.");
                 } else {
@@ -80,14 +85,16 @@ public class SpaceShieldApp {
 
             switch (opcaoMenu) {
                 case "1":
-                    System.out.println("\n>>> SATÉLITES ATIVOS:");
-                    if (system.getSatellites().isEmpty()) {
-                        System.out.println("Nenhum satélite cadastrado no sistema.");
-                    } else {
-                        for (Satellite s : system.getSatellites()) {
-                            String propriedade = (s.getOwnerId() == usuarioAtual.getId()) ? " (Seu Satélite)" : "";
-                            System.out.println("- ID: " + s.getId() + " | Nome: " + s.getName() + " | Função: " + s.getFunction() + " | Risco: " + s.getRiskLevel() + propriedade);
+                    System.out.println("\n>>> MEUS SATÉLITES ATIVOS:");
+                    boolean encontrouSatelite = false;
+                    for (Satellite s : system.getSatellites()) {
+                        if (s.getOwnerId() == usuarioAtual.getId()) {
+                            System.out.println("- ID: " + s.getId() + " | Nome: " + s.getName() + " | Função: " + s.getFunction() + " | Risco: " + s.getRiskLevel());
+                            encontrouSatelite = true;
                         }
+                    }
+                    if (!encontrouSatelite) {
+                        System.out.println("Você ainda não possui nenhum satélite cadastrado.");
                     }
                     break;
 
@@ -101,7 +108,6 @@ public class SpaceShieldApp {
                         System.out.print("Função (Ex: GPS, Defesa): ");
                         String funcSat = scanner.nextLine();
 
-                        // O Satélite agora é criado atrelado ao ID do usuário atual!
                         system.registerSatellite(new Satellite(idSat, usuarioAtual.getId(), nomeSat, funcSat));
                     } catch (NumberFormatException e) {
                         System.out.println("[!] Erro: O ID deve ser um número inteiro.");
@@ -116,13 +122,17 @@ public class SpaceShieldApp {
                         Satellite alvo = system.findSatellite(alvoId);
 
                         if (alvo != null) {
-                            System.out.print("Tipo do Evento (Ex: Invasão, Falha de Autenticação): ");
-                            String tipoEvento = scanner.nextLine();
-                            System.out.print("Descrição técnica: ");
-                            String descEvento = scanner.nextLine();
+                            if (alvo.getOwnerId() != usuarioAtual.getId()) {
+                                System.out.println("[!] ACESSO NEGADO: Este satélite pertence a outra organização.");
+                            } else {
+                                System.out.print("Tipo do Evento (Ex: Invasão, Falha de Autenticação): ");
+                                String tipoEvento = scanner.nextLine();
+                                System.out.print("Descrição técnica: ");
+                                String descEvento = scanner.nextLine();
 
-                            AccessEvent novoEvento = new AccessEvent((int)(Math.random()*1000), alvo, tipoEvento, descEvento);
-                            system.logEvent(novoEvento);
+                                AccessEvent novoEvento = new AccessEvent((int)(Math.random()*1000), alvo, tipoEvento, descEvento);
+                                system.logEvent(novoEvento);
+                            }
                         } else {
                             System.out.println("[!] Satélite não encontrado na base de dados.");
                         }
@@ -132,13 +142,16 @@ public class SpaceShieldApp {
                     break;
 
                 case "4":
-                    System.out.println("\n>>> ALERTAS CRÍTICOS:");
-                    if (system.getActiveAlerts().isEmpty()) {
-                        System.out.println("Nenhum alerta ativo. O espaço está seguro.");
-                    } else {
-                        for (SecurityAlert alert : system.getActiveAlerts()) {
+                    System.out.println("\n>>> MEUS ALERTAS CRÍTICOS:");
+                    boolean encontrouAlerta = false;
+                    for (SecurityAlert alert : system.getActiveAlerts()) {
+                        if (alert.getEvent().getSatellite().getOwnerId() == usuarioAtual.getId()) {
                             System.out.println(alert.toString());
+                            encontrouAlerta = true;
                         }
+                    }
+                    if (!encontrouAlerta) {
+                        System.out.println("Nenhum alerta ativo para a sua frota. O espaço está seguro.");
                     }
                     break;
 
@@ -147,8 +160,13 @@ public class SpaceShieldApp {
                     try {
                         int relatorioId = Integer.parseInt(scanner.nextLine());
                         Satellite satRelatorio = system.findSatellite(relatorioId);
+                        
                         if (satRelatorio != null) {
-                            Report.generateIncidentHistory(satRelatorio);
+                            if (satRelatorio.getOwnerId() != usuarioAtual.getId()) {
+                                System.out.println("[!] ACESSO NEGADO: Este satélite pertence a outra organização.");
+                            } else {
+                                Report.generateIncidentHistory(satRelatorio);
+                            }
                         } else {
                             System.out.println("[!] Satélite não encontrado.");
                         }
@@ -160,11 +178,22 @@ public class SpaceShieldApp {
                 case "0":
                     System.out.println("\nDesconectando do servidor SpaceShield...");
                     usuarioAtual = null;
+                    limparTela();
                     break;
 
                 default:
                     System.out.println("\n[!] Comando não reconhecido.");
                     break;
+            }
+
+            if (usuarioAtual != null && !opcaoMenu.equals("0")) {
+                contadorComandos++;
+                if (contadorComandos >= 3) {
+                    System.out.println("\n[Aguarde] Pressione ENTER para continuar e limpar a tela...");
+                    scanner.nextLine(); 
+                    limparTela();
+                    contadorComandos = 0; 
+                }
             }
         }
 

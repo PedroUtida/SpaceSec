@@ -5,14 +5,16 @@ import java.util.List;
 
 public class Satellite {
     private int id;
+    private int ownerId;
     private String name;
     private String function;
     private String status;
-    private String riskLevel; 
-    private List<AccessEvent> events; 
+    private String riskLevel;
+    private List<AccessEvent> events;
 
-    public Satellite(int id, String name, String function) {
+    public Satellite(int id, int ownerId, String name, String function) {
         this.id = id;
+        this.ownerId = ownerId;
         this.name = name;
         this.function = function;
         this.status = "Operational";
@@ -34,6 +36,7 @@ public class Satellite {
     }
 
     public int getId() { return id; }
+    public int getOwnerId() { return ownerId; }
     public String getName() { return name; }
     public String getFunction() { return function; }
     public String getStatus() { return status; }

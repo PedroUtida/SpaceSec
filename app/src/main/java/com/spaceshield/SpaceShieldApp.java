@@ -3,12 +3,30 @@ package com.spaceshield;
 import com.spaceshield.model.*;
 import com.spaceshield.service.*;
 import java.util.Scanner;
+import java.util.Random;
 
 public class SpaceShieldApp {
 
     public static void limparTela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    private static int generateUniqueSatelliteId(Monitoring system) {
+        Random rand = new Random();
+        int newId;
+        boolean isUnique;
+        do {
+            newId = 1000 + rand.nextInt(9000); 
+            isUnique = true;
+            for (Satellite s : system.getSatellites()) {
+                if (s.getId() == newId) {
+                    isUnique = false;
+                    break;
+                }
+            }
+        } while (!isUnique);
+        return newId;
     }
 
     public static void main(String[] args) {
@@ -18,6 +36,10 @@ public class SpaceShieldApp {
         Monitoring system = new Monitoring();
 
         authService.registerUser("Admin FIAP", "admin@spaceshield.com", "1234");
+        User admin = authService.login("admin@spaceshield.com", "1234");
+
+        system.registerSatellite(new Satellite(generateUniqueSatelliteId(system), admin.getId(), "Starlink-BR1", "Internet"));
+        system.registerSatellite(new Satellite(generateUniqueSatelliteId(system), admin.getId(), "GeoSync-Defense", "Militar"));
 
         boolean rodando = true;
         User usuarioAtual = null;
@@ -30,7 +52,7 @@ public class SpaceShieldApp {
         while (usuarioAtual == null && rodando) {
             System.out.println("\n[1] Fazer Login");
             System.out.println("[2] Sair do Sistema");
-            System.out.println("[3] Criar Conta");
+            System.out.println("[3] Criar Conta (Sign Up)");
             System.out.print("Escolha uma opção: ");
             String opcaoAuth = scanner.nextLine();
 
@@ -100,18 +122,14 @@ public class SpaceShieldApp {
 
                 case "2":
                     System.out.println("\n>>> CADASTRO DE SATÉLITE:");
-                    try {
-                        System.out.print("ID do Satélite (Número inteiro): ");
-                        int idSat = Integer.parseInt(scanner.nextLine());
-                        System.out.print("Nome (Ex: Starlink-X): ");
-                        String nomeSat = scanner.nextLine();
-                        System.out.print("Função (Ex: GPS, Defesa): ");
-                        String funcSat = scanner.nextLine();
+                    System.out.print("Nome (Ex: Starlink-X): ");
+                    String nomeSat = scanner.nextLine();
+                    System.out.print("Função (Ex: GPS, Defesa): ");
+                    String funcSat = scanner.nextLine();
 
-                        system.registerSatellite(new Satellite(idSat, usuarioAtual.getId(), nomeSat, funcSat));
-                    } catch (NumberFormatException e) {
-                        System.out.println("[!] Erro: O ID deve ser um número inteiro.");
-                    }
+                    int newAutoId = generateUniqueSatelliteId(system);
+                    system.registerSatellite(new Satellite(newAutoId, usuarioAtual.getId(), nomeSat, funcSat));
+                    System.out.println("[+] Satélite registrado automaticamente com o ID Único: " + newAutoId);
                     break;
 
                 case "3":

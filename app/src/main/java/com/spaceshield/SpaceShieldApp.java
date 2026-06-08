@@ -7,25 +7,31 @@ public class SpaceShieldApp {
         System.out.println("--- SpaceShield Boot Sequence Initiated ---\n");
 
         try (Connection dbConnection = DatabaseConfig.getConnection()) {
-            
+
             System.out.println("[System] H2 Database connected successfully.\n");
 
             AuthService authService = new AuthService(dbConnection);
-            
-            User adminUser = authService.registerUser("User1", "admin@spaceshield.com", "securePass123");
 
             System.out.println("Attempting login...");
+            
             boolean isAcessGranted = authService.login("admin@spaceshield.com", "securePass123");
+
+            if (!isAcessGranted) {
+                System.out.println("[System] Admin account not found. Bootstrapping new admin...");
+                authService.registerUser("User1", "admin@spaceshield.com", "securePass123");
+
+                isAcessGranted = authService.login("admin@spaceshield.com", "securePass123");
+            }
 
             if (!isAcessGranted) {
                 System.out.println("ACCESS DENIED. Incorrect credentials.");
                 return;
             }
 
-            System.out.println("ACCESS GRANTED. Welcome, " + adminUser.getName() + ".\n");
+            System.out.println("ACCESS GRANTED. Welcome.\n");
 
             Monitoring system = new Monitoring(dbConnection);
-            
+
             Satellite s1 = new Satellite(1, "Starlink-BR1", "Internet");
             Satellite s2 = new Satellite(2, "GeoSync-Defense", "Military Communications");
             system.registerSatellite(s1);

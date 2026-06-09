@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceShield - Relatórios Dinâmicos</title>
+    <link rel="stylesheet" href="../resources/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div>
+                <h1>Relatório de Incidentes</h1>
+                <p>Extração dinâmica do histórico de AccessEvents (Logs de Auditoria).</p>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Visão Geral</a>
+                <a href="satellites.html">Satélites</a>
+                <a href="alerts.html">Eventos de Risco</a>
+                <a href="reports.html" class="active">Relatórios</a>
+                <a href="#" id="logout-btn" style="color: var(--danger);">Sair</a>
+            </div>
+        </nav>
+
+        <div class="card" style="margin-bottom: 24px;">
+            <h2 style="margin-bottom: 12px;">Selecione o Ativo para Auditoria</h2>
+            <div style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <label for="report-sat-select" style="color: var(--text-muted);">ID e Nomenclatura do Satélite</label>
+                    <select id="report-sat-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 1rem; margin-top: 8px; background-color: var(--surface);">
+                        <option value="">-- Escolha um satélite da sua frota --</option>
+                        </select>
+                </div>
+                <button onclick="generateReportUI()" class="btn-primary" style="height: 48px;">Extrair Histórico Completo</button>
+            </div>
+        </div>
+
+        <div class="card" style="background-color: var(--bg-main); min-height: 300px; border: 1px dashed var(--border);">
+            <div id="report-history" style="font-family: 'JetBrains Mono', monospace, Consolas; font-size: 0.95rem; line-height: 1.6; color: var(--text-main);">
+                <p class="text-muted" style="text-align: center; margin-top: 40px;">
+                    Aguardando seleção... <br><br>
+                    Os logs de acesso (AccessEvents) e o Nível de Risco atual do satélite selecionado serão renderizados aqui.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../resources/app.js"></script>
+</body>
+</html>

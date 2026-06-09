@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>SpaceShield - Satélites</title>
+    <link rel="stylesheet" href="../resources/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div>
+                <h1>Gestão de Infraestrutura Orbital</h1>
+                <p>Controle de acesso e monitoramento de superfície de ataque.</p>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Visão Geral</a>
+                <a href="satellites.html" class="active">Satélites</a>
+                <a href="alerts.html">Eventos de Risco</a>
+                <a href="reports.html">Relatórios</a>
+                <a href="#" id="logout-btn" style="color: var(--danger);">Sair</a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Único</th>
+                            <th>Nomenclatura da Missão</th>
+                            <th>Aplicação Crítica (Alvo)</th>
+                            <th>Nível de Risco</th>
+                            <th>Atividade de Rede</th>
+                        </tr>
+                    </thead>
+                    <tbody id="satellite-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+            <h2>Cadastrar Novo Ativo na Rede</h2>
+            <form id="register-form" style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <label for="sat-name">Nome do Satélite</label>
+                    <input type="text" id="sat-name" placeholder="Ex: GovCom-1" required>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <label for="sat-focus">Aplicação / Vulnerabilidade Primária</label>
+                    <input type="text" id="sat-focus" placeholder="Ex: Comunicações Criptografadas" required>
+                </div>
+                <button type="submit" class="btn-primary">Provisionar Monitoramento</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../resources/app.js"></script>
+</body>
+</html>

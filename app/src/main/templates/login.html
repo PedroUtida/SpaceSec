@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>SpaceShield - Autenticação</title>
+    <link rel="stylesheet" href="../resources/style.css">
+</head>
+<body>
+    <div class="center-layout">
+        <div style="display: flex; gap: 20px; max-width: 850px; width: 100%; flex-wrap: wrap;">
+
+            <div class="card auth-card" style="flex: 1; min-width: 300px;">
+                <h2 style="margin-bottom: 4px;">Terminal SpaceShield</h2>
+                <p style="margin-bottom: 24px; font-size: 0.9rem;">Cibersegurança de Infraestrutura Orbital</p>
+
+                <form id="login-form" class="form-group">
+                    <div>
+                        <label>E-mail Operacional</label>
+                        <input type="email" id="email" value="admin@spaceshield.com" required>
+                    </div>
+                    <div>
+                        <label>Chave de Acesso</label>
+                        <input type="password" id="password" value="1234" required>
+                    </div>
+                    <button type="submit" class="btn-primary" style="margin-top: 10px;">Autenticar Sessão</button>
+                </form>
+            </div>
+
+            <div class="card auth-card" style="flex: 1; min-width: 300px; background-color: #f8fafc; border: 1px dashed var(--border);">
+                <h2 style="margin-bottom: 4px;">Novo Analista?</h2>
+                <p style="margin-bottom: 24px; font-size: 0.9rem;">Solicite acesso ao monitoramento de ativos</p>
+
+                <form id="register-operator-form" class="form-group">
+                    <div>
+                        <label>Nome Completo</label>
+                        <input type="text" id="reg-name" placeholder="Nome do analista" required>
+                    </div>
+                    <div>
+                        <label>E-mail Institucional</label>
+                        <input type="email" id="reg-email" placeholder="nome@agencia.gov" required>
+                    </div>
+                    <div>
+                        <label>Criar Senha Segura</label>
+                        <input type="password" id="reg-pass" placeholder="Mínimo de 8 caracteres" minlength="8" required>
+                    </div>
+                    <button type="submit" class="btn-secondary" style="margin-top: 10px; width: 100%;">Registrar Credencial</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="../resources/app.js"></script>
+</body>
+</html>

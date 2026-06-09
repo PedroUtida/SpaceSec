@@ -68,9 +68,24 @@ SpaceSec/
 
 ---
 
+## 🎯 Conexão com os ODS da ONU
+
+Este projeto foi desenvolvido com base nos seguintes Objetivos de Desenvolvimento Sustentável:
+
+**ODS 9 — Indústria, inovação e infraestrutura**
+Satélites compõem a espinha dorsal da comunicação global, do rastreamento logístico e da conectividade de última milha. Ataques a essa infraestrutura têm impacto direto sobre redes de internet, sistemas bancários e comunicações militares. O SpaceShield aborda a proteção dessa camada crítica.
+
+**ODS 11 — Cidades e comunidades sustentáveis**
+Serviços urbanos essenciais — como mobilidade, abastecimento e resposta a emergências — dependem de sinais GPS e de comunicação via satélite. A indisponibilidade ou comprometimento desses sistemas pode paralisar cidades inteiras. Monitorar e reagir a anomalias nessa infraestrutura é parte da resiliência urbana.
+
+**ODS 8 — Trabalho decente e crescimento econômico**
+Operações logísticas, transações financeiras e cadeias de suprimento globais dependem da integridade de dados transmitidos via satélite. Falhas de segurança nessa camada geram prejuízos econômicos em escala e afetam diretamente empregos e a estabilidade de setores produtivos.
+
+---
+
 ## 📖 Sobre o Projeto
 
-O SpaceShield simula um **Security Operations Center (SOC)** voltado para infraestrutura orbital. A premissa é monitorar satélites fictícios e reagir a tentativas de invasão em tempo real.
+O SpaceShield é um **Security Operations Center (SOC)** voltado para infraestrutura orbital. O sistema permite monitorar ativos de satélite, registrar eventos de acesso e reagir a tentativas de invasão em tempo real.
 
 ### Funcionalidades
 
